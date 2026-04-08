@@ -19,7 +19,9 @@ public class SecurityConfig {
     //Cadena de filtros
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http.csrf( csrf -> csrf.disable())
+
             .authorizeHttpRequests(auth ->
                     auth
                             .requestMatchers("/contacts/public/**").permitAll()
@@ -28,7 +30,9 @@ public class SecurityConfig {
                             .requestMatchers(HttpMethod.DELETE,"/contacts/**").hasRole("ADMIN")
                             .anyRequest()
                             .authenticated())
+
                 .httpBasic(basic -> {});
+
         return http.build();
     }
 
